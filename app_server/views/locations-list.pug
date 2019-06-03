@@ -1,0 +1,34 @@
+extends layout
+
+include _includes/sharedHTMLfunctions
+
+block content
+    .row.banner
+        .col-12
+            h1= pageHeader.title
+                small &nbsp;#{ pageHeader.strapline }
+    .row
+        .col-12.col-md-8
+            .error= message
+            
+            app-home-list Loading....
+            
+            // each location in locations
+                .card
+                    .card-block
+                        h4
+                            a(href=`/location/${location._id}`)= location.name
+                            small &nbsp;
+                              +outputRating(location.rating)
+                            span.badge.badge-pill.badge-default.float-right= location.distance
+                        p.address= location.address
+                            .facilities
+                                each facility in location.facilities
+                                    span.badge.badge-warning= facility
+        .col-12.col-md-4
+            p.lead= sidebar
+
+block scripts
+    script(src='/build/runtime.a5dd35324ddfd942bef1.js')
+    script(src='/build/polyfills.46532d96d3286697c138.js')
+    script(src='/build/main.12360aae8b38c8ce638b.js')
